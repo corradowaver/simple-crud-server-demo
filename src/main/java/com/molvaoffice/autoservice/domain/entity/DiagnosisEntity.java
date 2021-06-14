@@ -8,25 +8,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-@Table(name = "car")
+@Table(name = "diagnosis")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarEntity {
+public class DiagnosisEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "isForeign")
-    private boolean isForeign;
-
-    @Column(name = "num")
-    private String num;
-
-    @Column(name = "color")
-    private String color;
-
-    @Column(name = "mark")
-    private String mark;
+    @Column(name = "name")
+    private String name;
 }

@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceDTO implements Convertable {
+public class WardDTO implements Convertable {
     private Long id;
     private String name;
-    private Integer costOur;
-    private Integer costForeign;
+    private Integer maxCount;
+    private Long diagnosisId;
 }

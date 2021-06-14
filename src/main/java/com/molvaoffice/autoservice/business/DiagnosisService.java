@@ -1,10 +1,8 @@
 package com.molvaoffice.autoservice.business;
 
-import com.molvaoffice.autoservice.db_layer.repository.MasterRepository;
-import com.molvaoffice.autoservice.domain.dto.CarDTO;
-import com.molvaoffice.autoservice.domain.dto.MasterDTO;
-import com.molvaoffice.autoservice.domain.entity.CarEntity;
-import com.molvaoffice.autoservice.domain.entity.MasterEntity;
+import com.molvaoffice.autoservice.db_layer.repository.DiagnosisRepository;
+import com.molvaoffice.autoservice.domain.dto.DiagnosisDTO;
+import com.molvaoffice.autoservice.domain.entity.DiagnosisEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -15,12 +13,12 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class MasterService {
+public class DiagnosisService {
 
-    private final MasterRepository masterRepository;
+    private final DiagnosisRepository masterRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public List<MasterDTO> getAllMasters() {
+    public List<DiagnosisDTO> getAllMasters() {
         return masterRepository
                 .findAll()
                 .stream()
@@ -28,7 +26,7 @@ public class MasterService {
                 .collect(Collectors.toList());
     }
 
-    public MasterDTO getMaster(Long masterId) {
+    public DiagnosisDTO getMaster(Long masterId) {
         return convertMasterEntityToMasterDTO(masterRepository.findById(masterId).get());
     }
 
@@ -36,31 +34,31 @@ public class MasterService {
         masterRepository.deleteById(masterId);
     }
 
-    public MasterDTO getMasterTemplate() {
-        return new MasterDTO();
+    public DiagnosisDTO getMasterTemplate() {
+        return new DiagnosisDTO();
     }
 
-    public MasterDTO updateMaster(MasterDTO masterDTO) {
-        MasterEntity updatedMaster = masterRepository.findById(masterDTO.getId()).get();
+    public DiagnosisDTO updateMaster(DiagnosisDTO masterDTO) {
+        DiagnosisEntity updatedMaster = masterRepository.findById(masterDTO.getId()).get();
         updatedMaster.setName(masterDTO.getName());
         return convertMasterEntityToMasterDTO(masterRepository.save(updatedMaster));
     }
 
-    public MasterDTO createDTO(MasterDTO masterDTO) {
+    public DiagnosisDTO createDTO(DiagnosisDTO masterDTO) {
         return convertMasterEntityToMasterDTO(masterRepository.save(convertDTOToEntity(masterDTO)));
     }
 
-    private MasterDTO convertMasterEntityToMasterDTO(MasterEntity masterEntity) {
+    private DiagnosisDTO convertMasterEntityToMasterDTO(DiagnosisEntity masterEntity) {
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper
-                .map(masterEntity, MasterDTO.class);
+                .map(masterEntity, DiagnosisDTO.class);
     }
 
-    private MasterEntity convertDTOToEntity(MasterDTO masterDTO) {
+    private DiagnosisEntity convertDTOToEntity(DiagnosisDTO masterDTO) {
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper
-                .map(masterDTO, MasterEntity.class);
+                .map(masterDTO, DiagnosisEntity.class);
     }
 }

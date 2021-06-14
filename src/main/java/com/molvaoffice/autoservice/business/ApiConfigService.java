@@ -14,12 +14,11 @@ public class ApiConfigService {
     public ConfigDTO getApiConfigValues() {
         return ConfigDTO
                 .builder()
-                .appName("Autoservice")
+                .appName("Generic Hospital")
                 .titles(List.of(
-                        Map.of("title", "Cars", "endpoint", "/cars"),
-                        Map.of("title", "Masters", "endpoint", "/masters"),
-                        Map.of("title", "Services", "endpoint", "/services"),
-                        Map.of("title", "Works", "endpoint", "/works")
+                        Map.of("title", "People", "endpoint", "/people"),
+                        Map.of("title", "Diagnosis", "endpoint", "/diagnosis"),
+                        Map.of("title", "Wards", "endpoint", "/wards")
                 ))
                 .build();
     }

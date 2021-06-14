@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-@Table(name = "service")
+@Table(name = "wards")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceEntity {
+public class WardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,9 +21,10 @@ public class ServiceEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "costOur")
-    private Integer costOur;
+    @Column(name = "max_count")
+    private Integer maxCount;
 
-    @Column(name = "costForeign")
-    private Integer costForeign;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "diagnosis_id", referencedColumnName = "id")
+    private DiagnosisEntity diagnosis;
 }
